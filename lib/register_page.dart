@@ -1,9 +1,14 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'home_page.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key,});
+  const RegisterPage({
+    super.key,
+    required this.nextStep,
+  });
 
+  final void Function() nextStep;
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -146,6 +151,28 @@ class _RegisterPageState extends State<RegisterPage> {
               child: const Text(
                 'Log In',
                 style: TextStyle(fontSize: 15.0, color: Colors.blue),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 70.0,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              child: ElevatedButton(
+                onPressed: () => widget.nextStep(),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.purple,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  maximumSize: const Size(double.infinity, 50),
+                ),
+                child: const Text('Register',style: TextStyle(
+                  color: Colors.white),),
               ),
             ),
           ],

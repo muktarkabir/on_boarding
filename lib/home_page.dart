@@ -3,7 +3,7 @@ import 'register_page.dart';
 import 'create_profile_page.dart';
 import 'confirm_details_page.dart';
 
-  
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -12,10 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentStep = 0;
-  bool showNextbutton = false;
-
-
+int currentStep = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   width: 12.0,
                 ),
-                if (showNextbutton)
+                if (currentStep != 0)
                   Expanded(
                     child: ElevatedButton(
                       onPressed: details.onStepContinue,
@@ -100,7 +97,9 @@ class _HomePageState extends State<HomePage> {
         Step(
           state: currentStep > 0 ? StepState.complete : StepState.indexed,
           title: const Text('Account details'),
-          content: const RegisterPage(),
+          content: RegisterPage(
+            nextStep: () => setState(() => currentStep = 1),
+          ),
           isActive: currentStep >= 0,
         ),
         Step(
